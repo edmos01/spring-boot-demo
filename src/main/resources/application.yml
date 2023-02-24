@@ -1,0 +1,13 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+
+camel:
+  springboot:
+    routes-include-pattern: class-path:routes/*.yaml
+#  main:
+#    routes-reload-pattern: routes/*.*
+#    name: MyRoutesConfiguration
+#    routes-reload-enabled: true
+#    routes-reload-directory: src/main/resources
