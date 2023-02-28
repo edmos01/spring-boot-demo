@@ -17,8 +17,12 @@ jobs:
       run: mvn jar:jar -f pom.xml
     - name: Login Docker Hub
       run: docker login -u ${{ vars.DOCKER_HUB_USER }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+    - name: Versioning old Docker image
+      run: docker pull edmos01/spring-boot-demo:latest && docker tag edmos01/spring-boot-demo:latest edmos01/spring-boot-demo:$(date +%Y%m%d-%H%M%S) && docker push edmos01/spring-boot-demo:$(date +%Y%m%d-%H%M%S)
     - name: Build the Docker image
       run: cd deploy && docker build . --file Dockerfile --tag spring-boot-demo:latest
+    - name: Tagging Docker image
+      run: docker tag spring-boot-demo:latest edmos01/spring-boot-demo:latest
     - name: Tagging Docker image
       run: docker tag spring-boot-demo:latest edmos01/spring-boot-demo:latest
     - name: Push Docker image on Docker Hub
