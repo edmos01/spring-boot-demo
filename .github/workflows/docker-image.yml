@@ -18,4 +18,4 @@ jobs:
     - name: Build the Docker image
       run: cd deploy && docker build . --file Dockerfile --tag spring-boot-demo:latest
     - name: Pull Docker image on Docker Hub
-      run: docker push spring-boot-demo:latest
+      run: docker login -u ${{ vars.DOCKER_HUB_USER }} -p ${{ secrets.DOCKER_HUB_PASSWORD }} && docker push spring-boot-demo:latest
