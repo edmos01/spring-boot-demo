@@ -15,7 +15,11 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build application.jar
       run: mvn jar:jar -f pom.xml
+    - name: Login Docker Hub
+      run: cd deploy && docker login -u ${{ vars.DOCKER_HUB_USER }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
+    - name: Tagging Docker image
+      run: docker tag spring-boot-demo:latest spring-boot-demo:latest
     - name: Build the Docker image
-      run: cd deploy && docker build . --file Dockerfile --tag spring-boot-demo:latest
+      run: docker build . --file Dockerfile --tag spring-boot-demo:latest
     - name: Pull Docker image on Docker Hub
-      run: docker login -u ${{ vars.DOCKER_HUB_USER }} -p ${{ secrets.DOCKER_HUB_PASSWORD }} && docker push spring-boot-demo:latest
+      run: docker push spring-boot-demo:latest
