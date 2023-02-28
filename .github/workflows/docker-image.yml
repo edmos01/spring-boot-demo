@@ -6,14 +6,12 @@ on:
   pull_request:
     branches: [ "master" ]
 
-env:
-  TAG: $(date +%Y%m%d-%H%M%S)
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
+    env:
+      TAG: $(date +%Y%m%d-%H%M%S)
 
     steps:
     - uses: actions/checkout@v3
