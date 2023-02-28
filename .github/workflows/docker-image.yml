@@ -10,14 +10,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      TAG: $(date +%Y%m%d-%H%M%S)
 
     steps:
     - uses: actions/checkout@v3
     - name: Build application.jar
       run: mvn jar:jar -f pom.xml
     - name: Build the Docker image
-      run: cd deploy && docker build . --file Dockerfile --tag spring-boot-demo:$TAG
+      run: cd deploy && docker build . --file Dockerfile --tag spring-boot-demo:latest
     - name: Pull Docker image on Docker Hub
-      run: docker push spring-boot-demo:$TAG
+      run: docker push spring-boot-demo:latest
