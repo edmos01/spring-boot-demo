@@ -22,4 +22,4 @@ jobs:
     - name: Tagging Docker image
       run: docker tag spring-boot-demo:latest edmos01/spring-boot-demo:latest
     - name: Push Docker image on Docker Hub
-      run: docker push spring-boot-demo:latest
+      run: docker push edmos01/spring-boot-demo:latest
