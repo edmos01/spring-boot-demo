@@ -17,4 +17,4 @@ jobs:
     - name: Build application.jar
       run: mvn jar:jar -f pom.xml
     - name: Build the Docker image
-      run: docker build . --file deploy/Dockerfile --tag my-image-name:$(date +%s)
+      run: cd deploy && docker build . --file Dockerfile --tag my-image-name:$(date +%s)
