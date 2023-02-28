@@ -20,6 +20,6 @@ jobs:
     - name: Build the Docker image
       run: cd deploy && docker build . --file Dockerfile --tag spring-boot-demo:latest
     - name: Tagging Docker image
-      run: docker tag spring-boot-demo:latest spring-boot-demo:latest && docker push spring-boot-demo:latest
-#    - name: Push Docker image on Docker Hub
-#      run: docker push spring-boot-demo:latest
+      run: docker tag spring-boot-demo:latest edmos01/spring-boot-demo:latest
+    - name: Push Docker image on Docker Hub
+      run: docker push spring-boot-demo:latest
