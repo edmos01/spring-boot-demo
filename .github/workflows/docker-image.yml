@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  TAG: $(date +%Y%m%d-%H%M%S)
+
 jobs:
 
   build:
@@ -17,6 +20,6 @@ jobs:
     - name: Build application.jar
       run: mvn jar:jar -f pom.xml
     - name: Build the Docker image
-      run: cd deploy && export TAG=$(date +%Y%m%d-%H%M%S) && docker build . --file Dockerfile --tag spring-boot-demo:$TAG
+      run: cd deploy && docker build . --file Dockerfile --tag spring-boot-demo:$TAG
     - name: Pull Docker image on Docker Hub
       run: docker push spring-boot-demo:$TAG
